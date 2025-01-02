@@ -13,7 +13,7 @@ fn read_buffer() -> String {
     io::stdin()
         .read_line(&mut buffer)
         .expect("Failed to read line.");
-    buffer
+    buffer.trim().to_string()
 }
 
 #[tokio::main]
@@ -27,14 +27,14 @@ async fn main() -> Result<(), Error> {
     let post_theme_url = create_url("/questions".to_string()).unwrap();
     let request_builder: RequestBuilder = client.post(post_theme_url).body(question);
     let body = request_builder.send().await?.text().await?;
-    println!("{}", body); //TODO: Unnecessary code to be deleted later
+    println!("{}", body);
 
     println!("Enter the correct answer! (press Enter after typing)");
     let answer = read_buffer();
     let post_correct_url = create_url("/corrects".to_string()).unwrap();
     let request_builder: RequestBuilder = client.post(post_correct_url).body(answer);
     let body = request_builder.send().await?.text().await?;
-    println!("{}", body); //TODO: Unnecessary code to be deleted later
+    println!("{}", body);
 
     //TODO: Implement a hint posting function.
     Ok(())
