@@ -1,6 +1,8 @@
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder, Result};
+use rust_sample::config::{IP, PORT};
 use serde::{Deserialize, Serialize};
 use std::sync::Mutex;
+
 #[derive(Serialize, Deserialize)]
 struct ResultObject {
     result: bool,
@@ -74,7 +76,7 @@ async fn main() -> std::io::Result<()> {
             .service(get_question)
             .service(send_answer)
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind((IP, PORT))?
     .run()
     .await
 }

@@ -10,5 +10,14 @@ reqwest = { version = "0.12.12", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 url = "2.5.4"
 
-[workspace]
-members = ["questioner", "server"]
+[[bin]]
+name = "questioner"
+path = "src/bin/questioner.rs"
+
+[[bin]]
+name = "answer"
+path = "src/bin/answer.rs"
+
+[[bin]]
+name = "server"
+path = "src/bin/server.rs"
